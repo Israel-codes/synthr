@@ -91,16 +91,14 @@ if __name__ == "__main__":
         time.sleep(GENEREAL_SLEEP_TIMER)
 
         # Issue sUSD
-        issue_amount = int(1e18 * 10_000) + random.randint(
-            0, int(1e8)
-        )  # 10,000 sUSD + random amount
+        issue_amount = int(1e18 * 10_000) + random.randint(0, int(1e8))  # 10,000 sUSD + random amount
         build_and_send_transaction(
             web3_client=web3,
             contract_address=main_contract_address,
             function_name="issueSynths",
             abi=main_abi,
             account_address=account_address,
-            private_key=private_key,
+            private_key=private_key, 
             function_args=(
                 "0x0000000000000000000000000000000000000000000000000000000000000000",
                 0,
@@ -129,25 +127,25 @@ if __name__ == "__main__":
         time.sleep(GENEREAL_SLEEP_TIMER)
 
         # Withdraw Collateral
-        build_and_send_transaction(
-            web3_client=web3,
-            contract_address=main_contract_address,
-            function_name="withdrawCollateral",
-            abi=main_abi,
-            account_address=account_address,
-            private_key=private_key,
-            function_args=(
-                "0x4554480000000000000000000000000000000000000000000000000000000000",
-                int(
-                    issue_amount // 1e8
-                ),  # Feel free to change it to any amount you want,
-                # if you want to test liquidation functionality of the protocol.
-                "0x4c617965725a65726f0000000000000000000000000000000000000000000000",
-                0,
-                False,
-            ),
-        )
-        time.sleep(GENEREAL_SLEEP_TIMER)
+        # build_and_send_transaction(
+        #     web3_client=web3,
+        #     contract_address=main_contract_address,
+        #     function_name="withdrawCollateral",
+        #     abi=main_abi,
+        #     account_address=account_address,
+        #     private_key=private_key,
+        #     function_args=(
+        #         "0x4554480000000000000000000000000000000000000000000000000000000000",
+        #         int(
+        #             issue_amount // 1e8
+        #         ),  # Feel free to change it to any amount you want,
+        #         # if you want to test liquidation functionality of the protocol.
+        #         "0x4c617965725a65726f0000000000000000000000000000000000000000000000",
+        #         0,
+        #         False,
+        #     ),
+        # )
+        # time.sleep(GENEREAL_SLEEP_TIMER)
 
         # Cross chain swap, you need lz_value (to add more fees), to change chainID,
         # please test via UI to get the rest of arguments correctly.
